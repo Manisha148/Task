@@ -2,8 +2,8 @@ pipeline{
   agent any
   environment {
         imageName = "docker-image"
-        registryCredentials = "nexus"
-        registry = "18.212.33.180:8085/"
+        registryCredentials = "dockerhub"
+        registry = "ub.docker.com/repository/docker/manishaverma/manisha"
         dockerImage = ''
     }
   stages{
@@ -31,7 +31,7 @@ pipeline{
     stage('Pre Prod..') {
      steps{  
          script {
-             sh ' docker run -it -d -p 9090:9090 --name demo localhost:8085/docker-image'
+             sh ' docker run -it -d -p 9090:9090 --name demo localhost:ub.docker.com/repository/docker/manishaverma/manisha/docker-image'
         }
       }
     }
