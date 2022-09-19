@@ -9,7 +9,7 @@ pipeline{
   stages{
     stage('checkout'){
       steps{
-         checkout([$class: 'GitSCM', branches: [[name: '**']], extensions: [], userRemoteConfigs: [[credentialsId: 'github', url: ''https://github.com/Manisha148/Task.git']]])
+         checkout([$class: 'GitSCM', branches: [[name: '**']], extensions: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/Manisha148/Task.git']]])
       }
     }
      stage('Building image') {
