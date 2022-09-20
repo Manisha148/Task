@@ -1,42 +1,50 @@
-pipeline{
+pipeline {
 
-	agent any
+  environment {
+    dockerimagename = "manishaverma/docker-image"
+    dockerImage = ""
+  }
 
-	environment {
-		DOCKERHUB_CREDENTIALS=credentials('dokerhub')
-              
-	}
+  agent any
 
-	stages {
+  stages {
 
-		stage('Build') {
+    stage('Checkout Source') {
+      steps {
+        git 'https://github.com/Manisha148/Task.git'
+      }
+    }
 
-			steps {
-				sh 'docker build -t manishaverma/docker-image:latest .'
-			}
-		}
+    stage('Build image') {
+      steps{
+        script {
+          dockerImage = docker.build dockerimagename
+        }
+      }
+    }
 
-		stage('Login') {
+    stage('Pushing Image') {
+      environment {
+               registryCredential = 'dockerhublogin'
+           }
+      steps{
+        script {
+          docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
+            dockerImage.push("latest")
+          }
+        }
+      }
+    }
 
-			steps {
-				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-			}
-		}
+    stage('Deploying App to Kubernetes') {
+      steps {
+        script {
+          kubernetesDeploy(configs: "deploymentservice.yml", kubeconfigId: "kubernetes")
+        }
+      }
+    }
 
-		stage('Push') {
-
-			steps {
-				sh 'docker push manishaverma/docker-image:latest'
-			}
-		}
-	}
-
-	post {
-		always {
-			sh 'docker logout'
-		}
-	}
+  }
 
 }
-
 
