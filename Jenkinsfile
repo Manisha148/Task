@@ -39,13 +39,7 @@ pipeline{
 			sh 'docker logout'
 		}
 	}
-stage('Pre Prod..') {
-     steps{  
-         script {
-             sh ' docker run -it -d -p 9090:9090 --name demo localhost:8085/docker-image'
-        }
-      }
-    }
+
 }
 
 
