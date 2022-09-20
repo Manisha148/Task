@@ -4,8 +4,7 @@ pipeline{
 
 	environment {
 		DOCKERHUB_CREDENTIALS=credentials('dokerhub')
-                registry = "18.212.33.180:8085/"
-      
+              
 	}
 
 	stages {
