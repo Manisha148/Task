@@ -4,10 +4,8 @@ pipeline{
 
 	environment {
 		DOCKERHUB_CREDENTIALS=credentials('dokerhub')
-		imageName = "docker-image"
-                registryCredentials = "dockerhub"
                 registry = "18.212.33.180:8085/"
-        dockerImage = ''
+      
 	}
 
 	stages {
