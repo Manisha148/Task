@@ -58,7 +58,7 @@ agent any
  stage('Building image') {
    steps{
        script {
-          sh 'docker build -t deployrepo .'
+          sh 'docker build -t demo1 .'
           }
         }
       }
@@ -67,7 +67,7 @@ agent any
  	stage('Push') {
 
 		steps {
-			sh 'docker push manishaverma/deployrepo'
+			sh 'docker push manishaverma/demo1'
 			}
 		}
       
