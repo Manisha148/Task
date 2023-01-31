@@ -67,7 +67,8 @@ agent any
  	stage('Push') {
 
 		steps {
-			sh 'docker push manishaverma/demo1'
+			sh 'docker tag demo1 manishaverma/demo1:latest'
+			sh 'docker push manishaverma/demo1:latest'
 			}
 		}
       
