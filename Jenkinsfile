@@ -42,7 +42,7 @@
 pipeline {
   environment {
     dockerhubb = 'https://registry.hub.docker.com'
-    dockerhubCredential = 'dockerhub'
+    dockerhubCredential = 'docker'
     dockerImage = ''
     SCANNER_HOME = tool 'sonar'
     //EMAIL_TO = 'manis@testingxperts.com'
