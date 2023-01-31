@@ -42,7 +42,7 @@
 pipeline {
   environment {
     dockerhubb = 'https://registry.hub.docker.com'
-    dockerhubCredential = 'docker'
+    dockerhubCredential = 'dockerhub'
     dockerImage = ''
     SCANNER_HOME = tool 'sonar'
     //EMAIL_TO = 'manis@testingxperts.com'
@@ -58,7 +58,7 @@ agent any
  stage('Building image') {
    steps{
        script {
-          sh 'docker build -t demo1 .'
+          sh 'docker build -t demo .'
           }
         }
       }
@@ -67,8 +67,7 @@ agent any
  	stage('Push') {
 
 		steps {
-			sh 'docker tag demo1 manishaverma/demo1:latest'
-			sh 'docker push manishaverma/demo1:latest'
+			sh 'docker push vishal7500/demo:latest'
 			}
 		}
       
